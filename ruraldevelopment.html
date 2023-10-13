@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>
+ Problem Registration
+</title>
+</head>
+<style>
+body {
+  background-image: url('https://th.bing.com/th/id/OIP.-qkhrOYDPfgUxI4HdRVosgHaES?pid=ImgDet&rs=2');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+<body>
+<div>
+<h1>RURAL SOLUTION HUB</h1>
+<form  method="post">	
+
+<tr>	
+	<td><h2>Problem Type:</h2><br></td>
+	<td>
+		<input type="checkbox" name="p1"/>Agriculture<br>
+		<input type="checkbox" name="p2"/>Health<br>
+		<input type="checkbox" name="p3"/>Water<br>
+		<input type="checkbox" name="p4"/>Transport<br>
+                <input type="checkbox" name="p5"/>Education<br>   
+                <input type="checkbox" name="p6"/>Municipality<br>
+		<input type="checkbox" name="p7"/>Electricity<br>
+                <input type="checkbox" name="p8"/>others<br>
+	</td>
+</tr>
+<tr>	<td>Problem:</td>
+	<td><br>
+	<textarea cols="30" rows="5" value="address" name="prob"></textarea>
+	<input type="file" name="pimage">
+       
+ <form action="upload.php" method="post" enctype="multipart/form-data">
+        <label for="audioInput">Choose an audio file:</label>
+  <input type="file" id="audioInput" name="audioInput" accept="audio/*">
+  <input type="submit" value="Upload">
+   </form>
+ 
+    <button id="startButton">Start recording</button>
+    <p id="output"></p>
+    
+    <script>
+        const startButton = document.getElementById('startButton ');
+        const output = document.getElementById('output');
+        
+        const recognition = new webkitSpeechRecognition(); // For Webkit-based browsers
+        // const recognition = new SpeechRecognition(); // For modern browsers
+        
+        recognition.lang = 'en-US'; // Set the language
+        
+        startButton.addEventListener('click', () => {
+            recognition.start();
+            output.innerHTML = 'Listening...';
+        });
+        
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            output.innerHTML = `You said: ${transcript}`;
+        };
+        
+        recognition.onerror = (event) => {
+            output.innerHTML = `Error: ${event.error}`;
+        };
+    </script>
+	</td>
+</tr>
+
+
+
+<tr>
+	<td>Address:</td>
+	<td><textarea cols="20" rows="5" value="address" name="addr"></textarea></td>
+</tr>
+
+
+	<td><input type="button" value="submit" name="ok"></a>
+	<input type="button" value="reset"></td>
+</tr>
+</strong>
+
+</table>
+            
+</form>
+<?php  
+$con=mysqli_connect("localhost","root","","student");
+if(isset($_POST['OK'])){
+$a=$_POST['name'];
+$b=$_POST['gender'];  
+$c=$_POST['photo'];  
+$d=$_POST['p1'];  
+$e=$_POST['p2'];
+$f=$_POST['p3'];  
+$g=$_POST['p4'];  
+$h=$_POST['prob'];  
+$i=$_POST['pimage'];  
+$j=$_POST['phno'];
+$k=$_POST['addr'];
+
+
+$sql=mysqli_query($con,"INSERT INTO problem VALUES ('$a','$b','$c','$d','$e','$f','$g','$h','$i','$j','$k')");
+}
+?> 
+
+</div>
+</body>
+</html>
